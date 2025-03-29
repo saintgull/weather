@@ -270,36 +270,42 @@
       gap: 0.5rem;
     }
 
-    .mood-section {
+    .weather-row {
       display: flex;
       flex-direction: row;
-      gap: 2rem;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
     }
-
+    
     @media (max-width: 768px) {
-      .mood-section {
+      .weather-row {
         flex-direction: column;
       }
+    }
+    
+    .visualization-section {
+      width: 100%;
     }
 
     .vibe-container {
       flex: 1;
       background-color: white;
       border-radius: var(--radius-lg);
-      padding: 1.5rem;
+      padding: 1.2rem;
       box-shadow: var(--shadow-md);
       border: none;
+      min-width: 250px;
     }
 
     .visualization-container {
-      flex: 2;
       position: relative;
-      min-height: 400px;
+      height: 350px;
       border-radius: var(--radius-lg);
       overflow: hidden;
       background-color: white;
       box-shadow: var(--shadow-md);
       border: none;
+      width: 100%;
     }
 
     .canvas-container {
@@ -396,32 +402,32 @@
         <button id="search-button">Get Weather Vibe</button>
       </div>
 
-      <div class="weather-card" id="weather-card" style="display: none;">
-        <div class="weather-icon" id="weather-icon">🌤️</div>
-        <div class="temperature" id="temperature">--°C</div>
-        <div class="temp-toggle">
-          <label for="temp-unit-toggle" id="celsius-label" class="active">°C</label>
-          <label class="temp-toggle-switch">
-            <input type="checkbox" id="temp-unit-toggle">
-            <span class="toggle-slider"></span>
-          </label>
-          <label for="temp-unit-toggle" id="fahrenheit-label">°F</label>
-        </div>
-        <div class="description" id="description">--</div>
-        <div class="location" id="location">--</div>
-        <div class="weather-details">
-          <div class="detail">
-            <span>💧</span>
-            <span id="humidity">--%</span>
-          </div>
-          <div class="detail">
-            <span>💨</span>
-            <span id="wind">-- m/s</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="mood-section">
+      <div class="weather-row">
+        <div class="weather-card" id="weather-card" style="display: none;">
+          <div class="weather-icon" id="weather-icon">🌤️</div>
+          <div class="temperature" id="temperature">--°C</div>
+          <div class="temp-toggle">
+            <label for="temp-unit-toggle" id="celsius-label" class="active">°C</label>
+            <label class="temp-toggle-switch">
+              <input type="checkbox" id="temp-unit-toggle">
+              <span class="toggle-slider"></span>
+            </label>
+            <label for="temp-unit-toggle" id="fahrenheit-label">°F</label>
+          </div>
+          <div class="description" id="description">--</div>
+          <div class="location" id="location">--</div>
+          <div class="weather-details">
+            <div class="detail">
+              <span>💧</span>
+              <span id="humidity">--%</span>
+            </div>
+            <div class="detail">
+              <span>💨</span>
+              <span id="wind">-- m/s</span>
+            </div>
+          </div>
+        </div>
         <div class="vibe-container">
           <h2>Weather Vibe</h2>
           <div class="vibe-description">
@@ -438,6 +444,9 @@
             <p class="recommendation" id="recommendation-text"></p>
           </div>
         </div>
+      </div>
+      
+      <div class="visualization-section">
         <div class="visualization-container">
           <div class="canvas-container">
             <canvas id="color-canvas"></canvas>
@@ -448,7 +457,7 @@
     </main>
 
     <footer>
-      <p>Created with the Vibe Engine | Weather data from OpenWeatherMap | <span style="color: var(--atomic-tangerine);">©2025</span></p>
+      <p>Created with the Vibe Engine | Weather data from OpenWeatherMap | <span style="color: var(--atomic-tangerine);">© 2025 <a href="https://curate.beauty" target="_blank" style="color: var(--dark-slate-gray); text-decoration: none;">Saint Gull</a></span></p>
     </footer>
   </div>
 
