@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Mood Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Poppins:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Souvenir';
+      src: url('https://use.typekit.net/af/bea4a5/00000000000000007735a224/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff2'),
+           url('https://use.typekit.net/af/bea4a5/00000000000000007735a224/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Souvenir';
+      src: url('https://use.typekit.net/af/ae8cac/00000000000000007735a229/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3') format('woff2'),
+           url('https://use.typekit.net/af/ae8cac/00000000000000007735a229/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3') format('woff');
+      font-weight: 400;
+      font-style: italic;
+    }
+    
+    :root {
+      --feldgrau: #526760;
+      --dark-slate-gray: #374b4a;
+      --powder-blue: #b4cded;
+      --olive: #9b8816;
+      --atomic-tangerine: #f98948;
+      
+      --primary-color: var(--atomic-tangerine);
+      --primary-dark: #e97736;
+      --secondary-color: var(--olive);
+      --accent-color: var(--feldgrau);
+      --neutral-100: #f7f9fc;
+      --neutral-200: #eaeef4;
+      --neutral-300: #d8dfe8;
+      --neutral-700: var(--dark-slate-gray);
+      --neutral-800: #2a3a39;
+      --neutral-900: #1e2b2a;
+      --background-blue: var(--powder-blue);
+      
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 1rem;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(55, 75, 74, 0.15), 0 2px 4px -1px rgba(55, 75, 74, 0.08);
+      --shadow-lg: 0 10px 15px -3px rgba(55, 75, 74, 0.15), 0 4px 6px -2px rgba(55, 75, 74, 0.08);
+      --font-sans: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Souvenir', 'IM Fell English', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--neutral-900);
+      background-color: var(--background-blue);
+    }
+
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 3.4rem;
+      margin-bottom: 1.2rem;
+      color: var(--dark-slate-gray);
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-family: var(--font-display);
+      font-weight: normal;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--feldgrau);
+      letter-spacing: 0.5px;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      flex: 1;
+    }
+
+    .weather-input {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      padding: 0.85rem 1.2rem;
+      border: 1px solid var(--neutral-300);
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-family: var(--font-sans);
+      width: 300px;
+      background-color: white;
+      transition: all 0.3s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--atomic-tangerine);
+      box-shadow: 0 0 0 3px rgba(249, 137, 72, 0.15);
+    }
+
+    button {
+      padding: 0.85rem 1.5rem;
+      background-color: var(--atomic-tangerine);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: var(--shadow-md);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background-color: #fa7a32;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .weather-card {
+      background-color: white;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      margin-bottom: 2rem;
+      border: none;
+      position: relative;
+    }
+
+    .weather-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    }
+
+    .temperature {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: normal;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+      color: var(--atomic-tangerine);
+      display: inline-block;
+    }
+    
+    .temp-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .temp-toggle label {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--dark-slate-gray);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    
+    .temp-toggle label.active {
+      opacity: 1;
+      font-weight: 600;
+    }
+    
+    .temp-toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 24px;
+    }
+    
+    .temp-toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--neutral-300);
+      transition: .3s;
+      border-radius: 24px;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .toggle-slider {
+      background-color: var(--atomic-tangerine);
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+
+    .description {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--dark-slate-gray);
+    }
+
+    .weather-details {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .detail {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mood-section {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .mood-section {
+        flex-direction: column;
+      }
+    }
+
+    .vibe-container {
+      flex: 1;
+      background-color: white;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+      border: none;
+    }
+
+    .visualization-container {
+      flex: 2;
+      position: relative;
+      min-height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background-color: white;
+      box-shadow: var(--shadow-md);
+      border: none;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+    }
+
+    .canvas-container canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .vibe-description {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      background-color: var(--neutral-100);
+      border-radius: var(--radius-md);
+      border: none;
+    }
+
+    .vibe-description h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      color: var(--dark-slate-gray);
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--dark-slate-gray);
+      background-color: white;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      font-family: var(--font-sans);
+    }
+
+    .soundtrack {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      background-color: var(--neutral-100);
+      border-radius: var(--radius-md);
+      border: none;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .soundtrack h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      color: var(--olive);
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
+    }
+
+    .soundtrack p {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--neutral-700);
+    }
+
+    .recommendation {
+      font-style: italic;
+      margin-top: 1rem;
+      padding: 0.8rem;
+      background-color: rgba(249, 137, 72, 0.05);
+      border-left: 3px solid var(--atomic-tangerine);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-family: var(--font-display);
+      color: var(--neutral-800);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Weather Mood Board</h1>
+      <p class="subtitle">Experience the mood of any location's weather</p>
+    </header>
+
+    <main>
+      <div class="weather-input">
+        <input type="text" id="location-input" placeholder="Enter city name (e.g., London, Tokyo, New York)">
+        <button id="search-button">Get Weather Vibe</button>
+      </div>
+
+      <div class="weather-card" id="weather-card" style="display: none;">
+        <div class="weather-icon" id="weather-icon">🌤️</div>
+        <div class="temperature" id="temperature">--°C</div>
+        <div class="temp-toggle">
+          <label for="temp-unit-toggle" id="celsius-label" class="active">°C</label>
+          <label class="temp-toggle-switch">
+            <input type="checkbox" id="temp-unit-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+          <label for="temp-unit-toggle" id="fahrenheit-label">°F</label>
+        </div>
+        <div class="description" id="description">--</div>
+        <div class="location" id="location">--</div>
+        <div class="weather-details">
+          <div class="detail">
+            <span>💧</span>
+            <span id="humidity">--%</span>
+          </div>
+          <div class="detail">
+            <span>💨</span>
+            <span id="wind">-- m/s</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mood-section">
+        <div class="vibe-container">
+          <h2>Weather Vibe</h2>
+          <div class="vibe-description">
+            <h3>Current Vibe</h3>
+            <p id="vibe-description-text">
+              Enter a location to see its weather vibe.
+            </p>
+          </div>
+          <div class="soundtrack">
+            <h3>Soundtrack Suggestion</h3>
+            <p id="soundtrack-text">
+              Music recommendation will appear here...
+            </p>
+            <p class="recommendation" id="recommendation-text"></p>
+          </div>
+        </div>
+        <div class="visualization-container">
+          <div class="canvas-container">
+            <canvas id="color-canvas"></canvas>
+            <canvas id="texture-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Created with the Vibe Engine | Weather data from OpenWeatherMap | <span style="color: var(--atomic-tangerine);">©2025</span></p>
+    </footer>
+  </div>
+
+  <script>
+    // Weather API configuration
+    const API_KEY = '6b4aa854d72a6583e17beb669a197b22'; // OpenWeatherMap API key
+    const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
+
+    // DOM Elements Cache
+    const elements = {
+      locationInput: document.getElementById('location-input'),
+      searchButton: document.getElementById('search-button'),
+      weatherCard: document.getElementById('weather-card'),
+      weatherIcon: document.getElementById('weather-icon'),
+      temperature: document.getElementById('temperature'),
+      tempToggle: document.getElementById('temp-unit-toggle'),
+      celsiusLabel: document.getElementById('celsius-label'),
+      fahrenheitLabel: document.getElementById('fahrenheit-label'),
+      description: document.getElementById('description'),
+      location: document.getElementById('location'),
+      humidity: document.getElementById('humidity'),
+      wind: document.getElementById('wind'),
+      vibeDescriptionText: document.getElementById('vibe-description-text'),
+      soundtrackText: document.getElementById('soundtrack-text'),
+      recommendationText: document.getElementById('recommendation-text'),
+      colorCanvas: document.getElementById('color-canvas'),
+      textureCanvas: document.getElementById('texture-canvas')
+    };
+
+    // Canvas Contexts
+    let colorCtx, textureCtx;
+
+    // Vibe State - defaults will be overridden by weather data
+    const vibeState = {
+      temporalPace: 50,
+      temporalRhythm: 50,
+      temporalDensity: 50,
+      energyIntensity: 50,
+      energyFlow: 50,
+      energyStability: 50,
+      sensoryBrightness: 50,
+      sensoryWarmth: 50,
+      sensoryTexture: 50,
+    };
+
+    // Weather icon mapping
+    const weatherIcons = {
+      'Clear': '☀️',
+      'Clouds': '☁️',
+      'Rain': '🌧️',
+      'Drizzle': '🌦️',
+      'Thunderstorm': '⛈️',
+      'Snow': '❄️',
+      'Mist': '🌫️',
+      'Smoke': '🌫️',
+      'Haze': '🌫️',
+      'Dust': '🌫️',
+      'Fog': '🌫️',
+      'Sand': '🌫️',
+      'Ash': '🌫️',
+      'Squall': '💨',
+      'Tornado': '🌪️'
+    };
+
+    // Music recommendations based on weather
+    const musicRecommendations = {
+      'Clear': {
+        daytime: {
+          genres: 'Upbeat indie pop, summery electronic',
+          suggestion: 'Try "Walking on a Dream" by Empire of the Sun or "Summer" by Calvin Harris.'
+        },
+        nighttime: {
+          genres: 'Chill electronic, acoustic',
+          suggestion: 'Try "Midnight City" by M83 or "Exist for Love" by Aurora.'
+        }
+      },
+      'Clouds': {
+        genres: 'Dreampop, ambient indie',
+        suggestion: 'Try "Dreams" by Fleetwood Mac or "Myth" by Beach House.'
+      },
+      'Rain': {
+        genres: 'Jazz, lo-fi beats, ambient piano',
+        suggestion: 'Try "Rainy Blue" by Bill Evans or "coffee shop vibes" playlists.'
+      },
+      'Drizzle': {
+        genres: 'Acoustic folk, gentle piano',
+        suggestion: 'Try "Both Sides Now" by Joni Mitchell or "River Flows in You" by Yiruma.'
+      },
+      'Thunderstorm': {
+        genres: 'Dramatic classical, atmospheric rock',
+        suggestion: 'Try "The Tempest" by Beethoven or "Riders on the Storm" by The Doors.'
+      },
+      'Snow': {
+        genres: 'Minimal piano, ambient soundscapes',
+        suggestion: 'Try "Gymnopédie No.1" by Erik Satie or "Snowfall" by Michele McLaughlin.'
+      },
+      'Mist': {
+        genres: 'Ethereal ambient, hazy shoegaze',
+        suggestion: 'Try "Weightless" by Marconi Union or "When You Sleep" by My Bloody Valentine.'
+      },
+      'Fog': {
+        genres: 'Atmospheric post-rock, ambient',
+        suggestion: 'Try "Your Hand in Mine" by Explosions in the Sky or "Avril 14th" by Aphex Twin.'
+      }
+    };
+
+    // Initialize the application
+    function initApp() {
+      // Initialize canvas contexts
+      colorCtx = elements.colorCanvas.getContext('2d');
+      textureCtx = elements.textureCanvas.getContext('2d');
+
+      // Set up event listeners
+      setupEventListeners();
+
+      // Adjust canvas size to fit container
+      resizeCanvases();
+
+      // Window resize handler for responsive canvases
+      window.addEventListener('resize', () => {
+        resizeCanvases();
+        renderVisualizations();
+      });
+
+      console.log("Weather Mood Board initialized successfully");
+    }
+
+    // Temperature unit state
+    let isFahrenheit = false;
+    let currentTempCelsius = 0;
+
+    // Set up all event listeners
+    function setupEventListeners() {
+      // Search button click
+      elements.searchButton.addEventListener('click', () => {
+        const location = elements.locationInput.value.trim();
+        if (location) {
+          fetchWeatherData(location);
+        }
+      });
+
+      // Enter key in input field
+      elements.locationInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const location = elements.locationInput.value.trim();
+          if (location) {
+            fetchWeatherData(location);
+          }
+        }
+      });
+
+      // Temperature unit toggle
+      elements.tempToggle.addEventListener('change', () => {
+        isFahrenheit = elements.tempToggle.checked;
+        updateTemperatureDisplay();
+        
+        // Update active label styling
+        elements.celsiusLabel.classList.toggle('active', !isFahrenheit);
+        elements.fahrenheitLabel.classList.toggle('active', isFahrenheit);
+      });
+    }
+    
+    // Update temperature display based on selected unit
+    function updateTemperatureDisplay() {
+      if (currentTempCelsius === 0 && elements.temperature.textContent === "--°C") {
+        return; // Don't update if we don't have real data yet
+      }
+      
+      if (isFahrenheit) {
+        const tempF = Math.round(currentTempCelsius * 9/5 + 32);
+        elements.temperature.textContent = `${tempF}°F`;
+      } else {
+        elements.temperature.textContent = `${Math.round(currentTempCelsius)}°C`;
+      }
+    }
+
+    // Resize canvas elements to fit their containers
+    function resizeCanvases() {
+      try {
+        const container = elements.colorCanvas.parentElement;
+        if (container) {
+          const width = container.clientWidth;
+          const height = container.clientHeight;
+          
+          elements.colorCanvas.width = width;
+          elements.colorCanvas.height = height;
+          elements.textureCanvas.width = width;
+          elements.textureCanvas.height = height;
+        }
+      } catch (error) {
+        console.error("Error resizing canvases:", error);
+      }
+    }
+
+    // Fetch weather data from API
+    async function fetchWeatherData(location) {
+      try {
+        // If you don't have an API key, use this mock data for development
+        if (!API_KEY) {
+          console.log("No API key provided, using mock data");
+          const mockWeatherData = getMockWeatherData(location);
+          processWeatherData(mockWeatherData);
+          return;
+        }
+
+        const url = `${API_URL}?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=metric`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        processWeatherData(data);
+      } catch (error) {
+        console.error("Failed to fetch weather data:", error);
+        alert(`Could not find weather for "${location}". Please try another location.`);
+      }
+    }
+
+    // Process weather data
+    function processWeatherData(data) {
+      // Update weather display
+      const mainWeather = data.weather[0].main;
+      const icon = weatherIcons[mainWeather] || '🌍';
+      const temp = Math.round(data.main.temp);
+      currentTempCelsius = temp; // Save the temperature in Celsius
+      const description = data.weather[0].description;
+      const humidity = data.main.humidity;
+      const windSpeed = data.wind.speed;
+      const cityName = data.name;
+      const country = data.sys.country;
+      
+      elements.weatherIcon.textContent = icon;
+      // Set temperature based on current unit selection
+      updateTemperatureDisplay();
+      elements.description.textContent = description;
+      elements.location.textContent = `${cityName}, ${country}`;
+      elements.humidity.textContent = `${humidity}%`;
+      elements.wind.textContent = `${windSpeed} m/s`;
+      elements.weatherCard.style.display = 'block';
+      
+      // Convert weather to vibe parameters
+      setVibeFromWeather(data);
+      
+      // Render visualizations
+      renderVisualizations();
+      
+      // Update music recommendations
+      updateMusicRecommendation(mainWeather, data.dt, data.sys.sunrise, data.sys.sunset);
+    }
+
+    // Convert weather data to vibe parameters
+    function setVibeFromWeather(data) {
+      const temp = data.main.temp;
+      const humidity = data.main.humidity;
+      const clouds = data.clouds ? data.clouds.all : 0;
+      const windSpeed = data.wind.speed;
+      const rain = data.rain ? data.rain["1h"] || 0 : 0;
+      const snow = data.snow ? data.snow["1h"] || 0 : 0;
+      const mainWeather = data.weather[0].main;
+      
+      // Is it day or night?
+      const isDay = data.dt > data.sys.sunrise && data.dt < data.sys.sunset;
+      
+      // Temporal dimensions
+      vibeState.temporalPace = mapWeatherToVibe('pace', temp, windSpeed, mainWeather);
+      vibeState.temporalRhythm = mapWeatherToVibe('rhythm', windSpeed, rain, mainWeather);
+      vibeState.temporalDensity = mapWeatherToVibe('density', clouds, humidity, mainWeather);
+      
+      // Energy dimensions
+      vibeState.energyIntensity = mapWeatherToVibe('intensity', temp, windSpeed, mainWeather);
+      vibeState.energyFlow = mapWeatherToVibe('flow', windSpeed, clouds, mainWeather);
+      vibeState.energyStability = mapWeatherToVibe('stability', clouds, windSpeed, mainWeather);
+      
+      // Sensory dimensions
+      vibeState.sensoryBrightness = mapWeatherToVibe('brightness', isDay, clouds, mainWeather);
+      vibeState.sensoryWarmth = mapWeatherToVibe('warmth', temp, isDay, mainWeather);
+      vibeState.sensoryTexture = mapWeatherToVibe('texture', humidity, rain, mainWeather);
+      
+      // Update vibe description
+      updateVibeDescription(mainWeather, isDay, temp);
+    }
+
+    // Map weather parameters to vibe values
+    function mapWeatherToVibe(dimension, param1, param2, weatherType) {
+      // This mapping function could be much more sophisticated
+      // Here's a simple version that maps different weather aspects to vibe dimensions
+      
+      switch(dimension) {
+        case 'pace':
+          // Map temperature and wind speed to pace (higher temp & wind = faster pace)
+          if (weatherType === 'Snow') return 20; // Slow pace for snow
+          if (weatherType === 'Rain') return 40; // Moderate-slow for rain
+          if (weatherType === 'Thunderstorm') return 80; // Fast for storms
+          // For other weather: calculate based on temp and wind
+          return Math.min(100, Math.max(0, 
+            ((param1 + 10) / 40 * 50) + (param2 / 10 * 50)
+          )); 
+          
+        case 'rhythm':
+          // Map wind speed and rain to rhythm (higher wind & rain = more irregular rhythm)
+          if (weatherType === 'Clear') return 20; // Regular rhythm for clear skies
+          if (weatherType === 'Thunderstorm') return 90; // Very irregular for storms
+          // For other weather: calculate based on wind and rain
+          return Math.min(100, Math.max(0, 
+            (param1 * 5) + (param2 ? 50 : 0)
+          ));
+          
+        case 'density':
+          // Map clouds and humidity to density (higher clouds & humidity = higher density)
+          if (weatherType === 'Fog' || weatherType === 'Mist') return 90; // High density
+          if (weatherType === 'Clear') return 10; // Low density
+          // For other weather: calculate based on clouds and humidity
+          return Math.min(100, Math.max(0, 
+            (param1 / 100 * 60) + (param2 / 100 * 40)
+          ));
+          
+        case 'intensity':
+          // Map temperature and wind to intensity (extreme temperatures = higher intensity)
+          if (weatherType === 'Thunderstorm') return 90; // High intensity
+          if (weatherType === 'Snow' || weatherType === 'Mist') return 30; // Low intensity
+          // For other weather: calculate based on temp and wind
+          const tempIntensity = Math.abs(param1 - 20) * 2; // 20°C is most moderate
+          return Math.min(100, Math.max(0, 
+            (tempIntensity) + (param2 * 5)
+          ));
+          
+        case 'flow':
+          // Map wind and clouds to flow (lower wind & lower clouds = higher flow)
+          if (weatherType === 'Rain' || weatherType === 'Snow') return 30; // Staccato
+          if (weatherType === 'Clear' && param1 < 5) return 80; // Flowing for clear, calm days
+          // For other weather: calculate based on wind and clouds
+          return Math.min(100, Math.max(0, 
+            80 - (param1 * 5) - (param2 / 100 * 30)
+          ));
+          
+        case 'stability':
+          // Map clouds and wind to stability (lower clouds & wind = more stable)
+          if (weatherType === 'Thunderstorm') return 10; // Very unstable
+          if (weatherType === 'Clear' && param2 < 2) return 90; // Very stable for clear, calm
+          // For other weather: calculate based on clouds and wind
+          return Math.min(100, Math.max(0, 
+            90 - (param1 / 100 * 50) - (param2 * 5)
+          ));
+          
+        case 'brightness':
+          // Map daylight and clouds to brightness
+          if (!param1) return 20; // Night is darker
+          if (weatherType === 'Thunderstorm') return 30; // Dark for storms
+          if (weatherType === 'Clear' && param1) return 90; // Bright for clear day
+          // For other weather: calculate based on daytime and clouds
+          return Math.min(100, Math.max(0, 
+            (param1 ? 80 : 20) - (param2 / 100 * 50)
+          ));
+          
+        case 'warmth':
+          // Map temperature and daylight to warmth
+          if (param1 < 0) return 10; // Cold for below freezing
+          if (param1 > 30) return 90; // Warm for hot days
+          // For other weather: calculate based on temp and daytime
+          return Math.min(100, Math.max(0, 
+            (param1 + 10) / 50 * 100 + (param2 ? 10 : -10)
+          ));
+          
+        case 'texture':
+          // Map humidity and rain to texture
+          if (weatherType === 'Snow') return 80; // Highly textured for snow
+          if (weatherType === 'Rain' || weatherType === 'Thunderstorm') return 70; // Textured for rain
+          if (weatherType === 'Clear' && param1 < 40) return 20; // Smooth for clear, dry days
+          // For other weather: calculate based on humidity and rain
+          return Math.min(100, Math.max(0, 
+            (param1 / 100 * 40) + (param2 ? 50 : 0)
+          ));
+          
+        default:
+          return 50; // Default middle value
+      }
+    }
+
+    // Update vibe description based on weather
+    function updateVibeDescription(weatherType, isDay, temperature) {
+      let description = "";
+      
+      // Base description on weather type
+      switch(weatherType) {
+        case 'Clear':
+          if (isDay) {
+            if (temperature > 25) {
+              description = "A bright, energetic vibe with warm, saturated colors. The open sky creates a sense of possibility and expansion, while the warmth encourages activity and engagement.";
+            } else {
+              description = "A clear, crisp vibe with bright, open qualities. The atmosphere has a sense of clarity and definition, with smooth textures and a refreshing feel.";
+            }
+          } else {
+            description = "A deep, contemplative nighttime vibe with a sense of expansiveness. The clarity brings a feeling of calm stability with subtle textures against the darker backdrop.";
+          }
+          break;
+          
+        case 'Clouds':
+          if (isDay) {
+            description = "A soft, diffused vibe with gentle transitions between elements. The cloudy atmosphere creates a sense of gentle containment and introspection, with subtle variations in brightness.";
+          } else {
+            description = "A muted, mysterious nighttime vibe with layers of depth. The clouds create a sense of enclosure and intimacy, with soft edges and subtle movements.";
+          }
+          break;
+          
+        case 'Rain':
+          description = "A rhythmic, textured vibe with a sense of cyclical motion. The rain creates both movement and containment, with reflective surfaces and a cooling atmosphere that encourages inward focus.";
+          break;
+          
+        case 'Drizzle':
+          description = "A gentle, contemplative vibe with subtle, persistent textures. The light precipitation creates a soft soundscape and slight visual distortion, perfect for thoughtful introspection.";
+          break;
+          
+        case 'Thunderstorm':
+          description = "A dramatic, high-contrast vibe with powerful energy shifts. The storm creates moments of intense brightness against darkness, with unpredictable rhythms and raw elemental forces.";
+          break;
+          
+        case 'Snow':
+          description = "A quiet, gentle vibe with high texture and soft brightness. The snow creates a dampening effect on sound and a unifying visual element, bringing a sense of timelessness and pause.";
+          break;
+          
+        case 'Mist':
+        case 'Fog':
+          description = "A mysterious, enveloping vibe with diffused light and soft edges. The reduced visibility creates intimate spaces and a sense of being between worlds, with subtle gradients replacing hard contrasts.";
+          break;
+          
+        default:
+          description = "A balanced atmospheric vibe reflecting the current weather conditions. The sensory experience combines visual elements, energy patterns, and temporal qualities unique to this moment.";
+      }
+      
+      elements.vibeDescriptionText.textContent = description;
+    }
+
+    // Update music recommendation based on weather
+    function updateMusicRecommendation(weatherType, currentTime, sunrise, sunset) {
+      const isDay = currentTime > sunrise && currentTime < sunset;
+      let recommendation = musicRecommendations[weatherType] || musicRecommendations['Clear'];
+      
+      // Use time-specific recommendation if available
+      if (typeof recommendation === 'object' && recommendation.daytime && recommendation.nighttime) {
+        recommendation = isDay ? recommendation.daytime : recommendation.nighttime;
+      }
+      
+      elements.soundtrackText.textContent = `Genre suggestion: ${recommendation.genres}`;
+      elements.recommendationText.textContent = recommendation.suggestion;
+    }
+
+    // Render all visualizations based on current vibe state
+    function renderVisualizations() {
+      try {
+        // Render color and texture
+        renderColorTexture();
+      } catch (error) {
+        console.error("Error in renderVisualizations:", error);
+      }
+    }
+
+    // Render the color and texture visualization
+    function renderColorTexture() {
+      // Clear canvases
+      colorCtx.clearRect(0, 0, elements.colorCanvas.width, elements.colorCanvas.height);
+      textureCtx.clearRect(0, 0, elements.textureCanvas.width, elements.textureCanvas.height);
+      
+      // Calculate visualization parameters from vibe state
+      const params = calculateVisualizationParams();
+      
+      // Render background color gradient
+      renderColorGradient(params);
+      
+      // Render texture overlay
+      renderTexturePattern(params);
+    }
+
+    // Calculate visual parameters based on vibe state
+    function calculateVisualizationParams() {
+      return {
+        // Color parameters
+        hue: mapValue(vibeState.sensoryWarmth, 0, 100, 240, 0), // Cool to warm (blue to red)
+        saturation: mapValue(vibeState.energyIntensity, 0, 100, 20, 90), // Low to high saturation
+        lightness: mapValue(vibeState.sensoryBrightness, 0, 100, 10, 90), // Dark to bright
+        
+        // Gradient parameters
+        gradientAngle: mapValue(vibeState.energyFlow, 0, 100, 0, 360), // Direction of gradient
+        gradientSpread: mapValue(vibeState.temporalRhythm, 0, 100, 0.1, 0.9), // How spread out the gradient is
+        
+        // Texture parameters
+        textureScale: mapValue(vibeState.temporalDensity, 0, 100, 0.01, 0.15), // Size of texture elements
+        textureComplexity: mapValue(vibeState.sensoryTexture, 0, 100, 1, 10), // Complexity of texture
+        textureOpacity: mapValue(vibeState.sensoryTexture, 0, 100, 0.1, 0.7), // Opacity of texture overlay
+        
+        // Motion parameters
+        motionSpeed: mapValue(vibeState.temporalPace, 0, 100, 0.1, 5), // Speed of any animations
+        motionVariability: mapValue(vibeState.energyStability, 0, 100, 1, 0.1), // Inverse of stability
+        
+        // Structure parameters
+        structureOrder: mapValue(vibeState.energyStability, 0, 100, 0.1, 0.9), // How ordered vs chaotic
+      };
+    }
+
+    // Render the color gradient background
+    function renderColorGradient(params) {
+      const width = elements.colorCanvas.width;
+      const height = elements.colorCanvas.height;
+      
+      // Create gradient
+      const angleInRadians = params.gradientAngle * (Math.PI / 180);
+      const gradientX1 = width / 2 - Math.cos(angleInRadians) * width;
+      const gradientY1 = height / 2 - Math.sin(angleInRadians) * height;
+      const gradientX2 = width / 2 + Math.cos(angleInRadians) * width;
+      const gradientY2 = height / 2 + Math.sin(angleInRadians) * height;
+      
+      const gradient = colorCtx.createLinearGradient(gradientX1, gradientY1, gradientX2, gradientY2);
+      
+      // Primary color based on hue/saturation/lightness
+      const mainColor = `hsl(${params.hue}, ${params.saturation}%, ${params.lightness}%)`;
+      // Secondary color - complementary or analogous based on energy stability
+      const secondaryHue = (params.hue + 180 * params.structureOrder) % 360;
+      const secondaryColor = `hsl(${secondaryHue}, ${params.saturation}%, ${params.lightness}%)`;
+      
+      // Add gradient stops
+      gradient.addColorStop(0, mainColor);
+      gradient.addColorStop(params.gradientSpread, secondaryColor);
+      gradient.addColorStop(1, mainColor);
+      
+      // Fill background
+      colorCtx.fillStyle = gradient;
+      colorCtx.fillRect(0, 0, width, height);
+      
+      // Add vignette effect based on energy intensity
+      if (params.saturation > 60) {
+        const vignetteSize = mapValue(params.saturation, 60, 90, 0.7, 0.5);
+        const vignetteGradient = colorCtx.createRadialGradient(
+          width / 2, height / 2, 0,
+          width / 2, height / 2, Math.max(width, height) * vignetteSize
+        );
+        
+        vignetteGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        vignetteGradient.addColorStop(1, 'rgba(0, 0, 0, 0.5)');
+        
+        colorCtx.fillStyle = vignetteGradient;
+        colorCtx.fillRect(0, 0, width, height);
+      }
+    }
+
+    // Render texture pattern overlay
+    function renderTexturePattern(params) {
+      // Set global opacity for texture layer
+      textureCtx.globalAlpha = params.textureOpacity;
+      
+      // Choose pattern type based on texture complexity and weather type
+      if (params.textureComplexity < 3) {
+        // Simple noise texture
+        renderNoiseTexture(params);
+      } else if (params.textureComplexity < 7) {
+        // Line pattern
+        renderLineTexture(params);
+      } else {
+        // Complex pattern
+        renderComplexTexture(params);
+      }
+    }
+
+    // Render simple noise texture
+    function renderNoiseTexture(params) {
+      const width = elements.textureCanvas.width;
+      const height = elements.textureCanvas.height;
+      
+      const imageData = textureCtx.createImageData(width, height);
+      const data = imageData.data;
+      
+      // Scale determines graininess
+      const scale = Math.ceil(width * params.textureScale);
+      const intensity = params.textureOpacity * 255;
+      
+      // Generate noise
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const i = (y * width + x) * 4;
+          
+          // Use structured randomness based on stability
+          const noiseValue = Math.random() < params.structureOrder ? 
+            Math.round(Math.random() * intensity) : 
+            Math.round(perlinNoise(x/scale, y/scale) * intensity);
+          
+          data[i] = data[i + 1] = data[i + 2] = 255;
+          data[i + 3] = noiseValue;
+        }
+      }
+      
+      textureCtx.putImageData(imageData, 0, 0);
+    }
+
+    // Render line-based texture
+    function renderLineTexture(params) {
+      const width = elements.textureCanvas.width;
+      const height = elements.textureCanvas.height;
+      
+      textureCtx.clearRect(0, 0, width, height);
+      
+      // Line parameters
+      const lineSpacing = width * params.textureScale;
+      const lineCount = Math.ceil(Math.max(width, height) / lineSpacing) * 2;
+      const lineWidth = lineSpacing * 0.2;
+      
+      // Line angle based on energy flow
+      const lineAngle = params.gradientAngle / 2;
+      
+      textureCtx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+      textureCtx.lineWidth = lineWidth;
+      
+      // Draw lines
+      textureCtx.save();
+      textureCtx.translate(width / 2, height / 2);
+      textureCtx.rotate(lineAngle * Math.PI / 180);
+      
+      for (let i = -lineCount; i < lineCount; i++) {
+        const pos = i * lineSpacing;
+        const variability = params.motionVariability * lineSpacing * 0.5;
+        
+        textureCtx.beginPath();
+        
+        // Add variability to lines based on stability
+        if (params.structureOrder > 0.7) {
+          // Straight lines for high order
+          textureCtx.moveTo(-width, pos);
+          textureCtx.lineTo(width, pos);
+        } else {
+          // Wavy lines for low order
+          textureCtx.moveTo(-width, pos);
+          
+          for (let x = -width; x < width; x += 20) {
+            const offsetY = Math.sin(x * 0.02) * variability * Math.random();
+            textureCtx.lineTo(x, pos + offsetY);
+          }
+        }
+        
+        textureCtx.stroke();
+      }
+      
+      textureCtx.restore();
+    }
+
+    // Render complex texture pattern
+    function renderComplexTexture(params) {
+      const width = elements.textureCanvas.width;
+      const height = elements.textureCanvas.height;
+      
+      textureCtx.clearRect(0, 0, width, height);
+      
+      // Shape parameters
+      const shapeSize = width * params.textureScale;
+      const gridSize = shapeSize * 1.5;
+      const rows = Math.ceil(height / gridSize) + 1;
+      const cols = Math.ceil(width / gridSize) + 1;
+      
+      // Determine shape complexity
+      const shapeComplexity = Math.floor(params.textureComplexity);
+      
+      textureCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      
+      // Draw grid of shapes
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * gridSize - gridSize / 2;
+          const y = row * gridSize - gridSize / 2;
+          
+          // Add some randomness to position based on structure order
+          const xOffset = params.structureOrder > 0.7 ? 0 : (Math.random() - 0.5) * gridSize * 0.6;
+          const yOffset = params.structureOrder > 0.7 ? 0 : (Math.random() - 0.5) * gridSize * 0.6;
+          
+          // Draw shape
+          textureCtx.save();
+          textureCtx.translate(x + xOffset, y + yOffset);
+          textureCtx.rotate(Math.random() * 2 * Math.PI * (1 - params.structureOrder));
+          
+          drawComplexShape(shapeSize, shapeComplexity, params.structureOrder);
+          
+          textureCtx.restore();
+        }
+      }
+    }
+
+    // Draw a complex shape with given parameters
+    function drawComplexShape(size, complexity, order) {
+      textureCtx.beginPath();
+      
+      if (order > 0.7) {
+        // More ordered shapes
+        if (complexity % 3 === 0) {
+          // Squares or rectangles
+          textureCtx.rect(-size/2, -size/2, size, size);
+        } else if (complexity % 3 === 1) {
+          // Circles or ellipses
+          textureCtx.ellipse(0, 0, size/2, size/2, 0, 0, 2 * Math.PI);
+        } else {
+          // Triangles
+          textureCtx.moveTo(0, -size/2);
+          textureCtx.lineTo(size/2, size/2);
+          textureCtx.lineTo(-size/2, size/2);
+          textureCtx.closePath();
+        }
+      } else {
+        // More organic shapes
+        const points = 5 + complexity;
+        const jitter = (1 - order) * 0.5;
+        
+        for (let i = 0; i < points; i++) {
+          const angle = (i / points) * 2 * Math.PI;
+          const radius = size/2 * (1 - jitter + Math.random() * jitter);
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          
+          if (i === 0) {
+            textureCtx.moveTo(x, y);
+          } else {
+            textureCtx.lineTo(x, y);
+          }
+        }
+        
+        textureCtx.closePath();
+      }
+      
+      textureCtx.fill();
+    }
+
+    // Utility function to map a value from one range to another
+    function mapValue(value, inMin, inMax, outMin, outMax) {
+      return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+    }
+
+    // Simple perlin noise approximation for texture generation
+    function perlinNoise(x, y) {
+      // Simple implementation - in a real app you'd use a proper perlin noise library
+      const X = Math.floor(x) & 255;
+      const Y = Math.floor(y) & 255;
+      
+      const xf = x - Math.floor(x);
+      const yf = y - Math.floor(y);
+      
+      const topRight = (X + 1 + (Y + 1) * 57) / 5770;
+      const topLeft = (X + (Y + 1) * 57) / 5770;
+      const bottomRight = (X + 1 + Y * 57) / 5770;
+      const bottomLeft = (X + Y * 57) / 5770;
+      
+      // Smoothed lerp for perlin noise
+      const u = smootherstep(xf);
+      const v = smootherstep(yf);
+      
+      return lerp(
+        lerp(bottomLeft, bottomRight, u),
+        lerp(topLeft, topRight, u),
+        v
+      );
+    }
+
+    // Improved smooth step function for noise
+    function smootherstep(t) {
+      return t * t * t * (t * (t * 6 - 15) + 10);
+    }
+
+    // Linear interpolation
+    function lerp(a, b, t) {
+      return a + t * (b - a);
+    }
+
+    // Generate mock weather data for development without API key
+    function getMockWeatherData(location) {
+      const weatherTypes = ['Clear', 'Clouds', 'Rain', 'Drizzle', 'Thunderstorm', 'Snow', 'Mist', 'Fog'];
+      const randomWeatherIndex = Math.floor(Math.random() * weatherTypes.length);
+      const weatherType = weatherTypes[randomWeatherIndex];
+      
+      // Time calculations
+      const now = Math.floor(Date.now() / 1000);
+      const sixHoursInSeconds = 6 * 60 * 60;
+      
+      // Generate data based on weather type
+      let temp, humidity, windSpeed, clouds, rain, snow;
+      
+      switch(weatherType) {
+        case 'Clear':
+          temp = 15 + Math.random() * 15; // 15-30°C for clear weather
+          humidity = 30 + Math.random() * 20; // 30-50%
+          windSpeed = Math.random() * 5; // 0-5 m/s
+          clouds = Math.random() * 10; // 0-10%
+          break;
+          
+        case 'Clouds':
+          temp = 10 + Math.random() * 15; // 10-25°C 
+          humidity = 50 + Math.random() * 20; // 50-70%
+          windSpeed = 2 + Math.random() * 5; // 2-7 m/s
+          clouds = 40 + Math.random() * 60; // 40-100%
+          break;
+          
+        case 'Rain':
+          temp = 5 + Math.random() * 15; // 5-20°C
+          humidity = 70 + Math.random() * 20; // 70-90%
+          windSpeed = 3 + Math.random() * 7; // 3-10 m/s
+          clouds = 80 + Math.random() * 20; // 80-100%
+          rain = 1 + Math.random() * 9; // 1-10mm
+          break;
+          
+        case 'Drizzle':
+          temp = 8 + Math.random() * 12; // 8-20°C
+          humidity = 75 + Math.random() * 15; // 75-90%
+          windSpeed = 1 + Math.random() * 4; // 1-5 m/s
+          clouds = 70 + Math.random() * 30; // 70-100%
+          rain = 0.1 + Math.random() * 0.9; // 0.1-1mm
+          break;
+          
+        case 'Thunderstorm':
+          temp = 10 + Math.random() * 15; // 10-25°C
+          humidity = 80 + Math.random() * 15; // 80-95%
+          windSpeed = 5 + Math.random() * 10; // 5-15 m/s
+          clouds = 90 + Math.random() * 10; // 90-100%
+          rain = 5 + Math.random() * 15; // 5-20mm
+          break;
+          
+        case 'Snow':
+          temp = -10 + Math.random() * 15; // -10-5°C
+          humidity = 70 + Math.random() * 20; // 70-90%
+          windSpeed = 2 + Math.random() * 6; // 2-8 m/s
+          clouds = 75 + Math.random() * 25; // 75-100%
+          snow = 1 + Math.random() * 9; // 1-10mm
+          break;
+          
+        case 'Mist':
+        case 'Fog':
+          temp = 0 + Math.random() * 15; // 0-15°C
+          humidity = 85 + Math.random() * 15; // 85-100%
+          windSpeed = Math.random() * 3; // 0-3 m/s
+          clouds = 50 + Math.random() * 50; // 50-100%
+          break;
+          
+        default:
+          temp = 10 + Math.random() * 15; // 10-25°C
+          humidity = 50 + Math.random() * 30; // 50-80%
+          windSpeed = 2 + Math.random() * 6; // 2-8 m/s
+          clouds = 30 + Math.random() * 70; // 30-100%
+      }
+      
+      return {
+        name: location,
+        sys: {
+          country: "Demo",
+          sunrise: now - sixHoursInSeconds,
+          sunset: now + sixHoursInSeconds
+        },
+        dt: now,
+        main: {
+          temp: Math.round(temp * 10) / 10,
+          humidity: Math.round(humidity)
+        },
+        wind: {
+          speed: Math.round(windSpeed * 10) / 10
+        },
+        clouds: {
+          all: Math.round(clouds)
+        },
+        rain: rain ? { "1h": Math.round(rain * 10) / 10 } : undefined,
+        snow: snow ? { "1h": Math.round(snow * 10) / 10 } : undefined,
+        weather: [
+          {
+            main: weatherType,
+            description: weatherType.toLowerCase()
+          }
+        ]
+      };
+    }
+
+    // Start the application when DOM is loaded
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
