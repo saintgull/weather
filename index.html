@@ -101,7 +101,7 @@
     main {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1rem;
       flex: 1;
     }
 
@@ -153,26 +153,29 @@
     .weather-card {
       background-color: white;
       border-radius: var(--radius-lg);
-      padding: 2rem;
+      padding: 1.2rem;
       box-shadow: var(--shadow-md);
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       border: none;
       position: relative;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .weather-icon {
-      font-size: 5rem;
-      margin-bottom: 1rem;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
       text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
     }
 
     .temperature {
       font-family: var(--font-display);
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: normal;
-      margin-bottom: 0.5rem;
-      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+      margin-top: 0.25rem;
       color: var(--atomic-tangerine);
       display: inline-block;
     }
@@ -182,8 +185,8 @@
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
     }
     
     .temp-toggle label {
@@ -245,8 +248,8 @@
     }
 
     .description {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
       text-transform: capitalize;
       font-family: var(--font-display);
       font-style: italic;
@@ -257,7 +260,8 @@
       display: flex;
       justify-content: center;
       gap: 2rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .detail {
